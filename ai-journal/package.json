@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@material-tailwind/react": "^2.1.8",
+    "dotenv": "^16.3.1",
+    "formdata-node": "^6.0.3",
     "next": "14.0.4",
     "openai": "^4.24.1",
     "react": "^18",

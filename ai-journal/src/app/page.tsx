@@ -1,11 +1,12 @@
 "use client";
 
+import 'dotenv/config'
 import { ThemeProvider, Button, Textarea } from "@material-tailwind/react";
 import { useState } from "react";
 import OpenAI from 'openai';
 
 const openai = new OpenAI({
-  apiKey: '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', // This is the default and can be omitted
+  apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
   dangerouslyAllowBrowser: true
 });
 
