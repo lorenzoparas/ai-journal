@@ -4,7 +4,6 @@ import 'dotenv/config'
 import { ThemeProvider, Button, Textarea } from "@material-tailwind/react";
 import { useState } from "react";
 import OpenAI from 'openai';
-import { randomUUID } from 'crypto';
 
 const dummy = ["sk-Arhk0KV", "R6c5ptMB4M", "yi7T3BlbkF", "JumYyU8ruT7", "KAYKba93aO"]
 
