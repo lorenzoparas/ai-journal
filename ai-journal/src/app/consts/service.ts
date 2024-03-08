@@ -3,7 +3,7 @@ import { Service } from "../types/service"
 export const CONTEXT_PROMPTS = {
     [Service.TC]: "You go through each sentence and extract every single example of a cognitive distortion in a journal entry, using direct quotes only.",
     [Service.PC]: "You go through each sentence and extract every narrow perspective that could benefit from alternative perspectives, such as new solutions or viewpoints in a journal entry, using direct quotes only.",
-    [Service.DI]: "You go through each sentence and extract the two most Insightful Reflection Points in a journal entry, using direct quotes only."
+    [Service.DI]: "You go through each sentence and extract the two most Insightful Reflection Points in a journal entry, using direct quotes only. "
 };
 
 export const CATEGORISE_AND_EXPLAIN_PROMPTS = {
