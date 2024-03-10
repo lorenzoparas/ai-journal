@@ -63,7 +63,7 @@ export default function Home() {
             <QuestionMarkCircleIcon
               onClick={() => setIsModalOpen(!isModalOpen)}
               color='black'
-              className='fixed w-16 h-16 bottom-8 right-8 cursor-pointer'
+              className='fixed w-8 h-8 bottom-8 right-8 cursor-pointer'
             />
           </main>
         </JournalContext.Provider>
