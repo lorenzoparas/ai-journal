@@ -9,7 +9,7 @@ import { Role } from "../types/history";
 const SystemMessage = ({ message, key }: { message: string, key?: string }) => {
     return (
         <div key={key} className="my-4">
-            { message }
+            {message}
         </div>
     );
 }
@@ -17,7 +17,7 @@ const SystemMessage = ({ message, key }: { message: string, key?: string }) => {
 const UserMessage = ({ message, key }: { message: string, key?: string }) => {
     return (
         <div key={key} className="my-4">
-            { message }
+            {message}
         </div>
     );
 }
@@ -28,6 +28,13 @@ const History = () => {
     return (
         <>
             <Card className="h-full p-4 w-2/5 shadow-blue-gray-900/5 flex">
+                <div className="relative h-full">
+                    <div className="w-full">
+                        <div className="mt-4">
+                            <ServiceSelect />
+                        </div>
+                    </div>
+                </div>
                 {
                     inputHistory.map(historyEntry => {
                         return (
@@ -37,14 +44,7 @@ const History = () => {
                         );
                     })
                 }
-                <div className="relative h-full">
-                    <div className="absolute bottom-0 w-full">
-                        <div className="mt-4">
-                            <ServiceSelect />
-                        </div>
-                    </div>
-                </div>
-            </Card> 
+            </Card>
         </>
     );
 };
