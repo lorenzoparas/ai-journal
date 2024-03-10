@@ -62,7 +62,7 @@ export default function Home() {
             <GetStartedModal />
             <QuestionMarkCircleIcon
               onClick={() => setIsModalOpen(!isModalOpen)}
-              color='black'
+              color='grey'
               className='fixed w-8 h-8 bottom-8 right-8 cursor-pointer'
             />
           </main>
