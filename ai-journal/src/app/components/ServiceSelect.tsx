@@ -8,6 +8,7 @@ import { JournalContextType } from "../types/journal";
 import { Role } from "../types/history";
 import identifyService from "../gpt/identifyService";
 import categoriseService from "../gpt/categoriseService";
+import { SparklesIcon } from "@heroicons/react/24/outline";
 
 const ServiceSelect = () => {
     const {
@@ -88,10 +89,10 @@ const ServiceSelect = () => {
 
     return (
         <Select
-            label="Select a service"
-            disabled={isLoading}
+            label={"AI Powered Analysis"}
+            disabled={isLoading || journal.length === 0}
             onChange={val => processService(val as Service)}
-            arrow={isLoading && <Spinner />}
+            arrow={isLoading ? <Spinner /> : <SparklesIcon />}
         >
             <Option value={Service.TC}>Scan for cognitive biases</Option>
             <Option value={Service.PC}>Offer a different perspective</Option>
