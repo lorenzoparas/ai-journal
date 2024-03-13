@@ -2,8 +2,6 @@ import { Select, Option, Spinner } from "@material-tailwind/react";
 import { Service } from "../types/service";
 import { useContext } from "react";
 import { JournalContext } from "../context/journal";
-import categoriseCognitiveDistortions from "../gpt/categoriseCognitiveDistortions";
-import identifyCognitiveDistortions from "../gpt/identifyCognitiveDistortions";
 import { JournalContextType } from "../types/journal";
 import { Role } from "../types/history";
 import identifyService from "../gpt/identifyService";
@@ -33,18 +31,18 @@ const ServiceSelect = () => {
 
         setIsLoading(true);
 
-        const cognitiveDistortions = await identifyCognitiveDistortions(journal);
-        const quotes = cognitiveDistortions.quotes;
+        const identifyOutput = await identifyService(journal, Service.TC);
+        const quotes = identifyOutput.quotes;
 
         if (quotes.length === 0) return;
-        const categorisedCognitiveDistortions = await categoriseCognitiveDistortions(quotes);
+        const categorisedOutput = await categoriseService(quotes, Service.TC);
 
         setIsLoading(false);
 
         newInputHistory = [...newInputHistory, { role: Role.SYSTEM, message: 'Here are some cognitive biases we identified.' }];
         setInputHistory(newInputHistory);
 
-        setServiceOutput(categorisedCognitiveDistortions);
+        setServiceOutput(categorisedOutput);
     };
 
     const onPC = async (journal: string) => {
