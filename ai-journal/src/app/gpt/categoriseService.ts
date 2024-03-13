@@ -1,3 +1,5 @@
+"use server"
+
 import { CATEGORISE_AND_EXPLAIN_PROMPTS, EXPLANATIONS, THINKING_PATTERNS } from "../consts/service";
 import openai from "../openai";
 import { Service } from "../types/service";

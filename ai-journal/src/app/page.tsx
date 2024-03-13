@@ -25,7 +25,6 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [serviceOutput, setServiceOutput] = useState<ServiceOutput>({ thinkingPatterns: [] });
   const [inputHistory, setInputHistory] = useState<InputHistoryItem[]>([]);
-
   const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
 
   return (
@@ -51,7 +50,7 @@ export default function Home() {
                 target="_blank"
                 className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
               >
-                Leave us feedback here!
+                Let us know how we can improve!
               </Typography>
             </div>
             <div className="flex h-[calc(100%-4rem)] w-[calc(100%-4rem)] mb-8 gap-x-4">
