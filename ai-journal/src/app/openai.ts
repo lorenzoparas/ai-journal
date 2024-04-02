@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 
-const dummy = ["sk-Arhk0KV", "R6c5ptMB4M", "yi7T3BlbkF", "JumYyU8ruT7", "KAYKba93aO"];
+const dummy = ["sk-cbr4VAw", "92uo6OxiM0", "bcYT3BlbkF", "JSM1aVdJLj5", "zxsvD6ae7U"];
 
 const openai = new OpenAI({
   apiKey: dummy.join(''),
