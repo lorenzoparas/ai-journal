@@ -1,10 +1,14 @@
-import { Card, Select, Option, Spinner } from "@material-tailwind/react";
+import { Card, Select, Option, Spinner, Alert, Button } from "@material-tailwind/react";
 import { JournalContext } from "../context/journal";
 import { JournalContextType } from "../types/journal";
 import { useContext } from "react";
 import ServiceSelect from "./ServiceSelect";
 import { v4 as uuidv4 } from 'uuid';
 import { Role } from "../types/history";
+import { ModalContextType, Modals } from "../types/modal";
+import { ModalContext } from "../context/modal";
+import { ApiKeyContextType } from "../types/api-key";
+import { ApiKeyContext } from "../context/api-key";
 
 const SystemMessage = ({ message, key }: { message: string, key?: string }) => {
     return (
@@ -24,6 +28,8 @@ const UserMessage = ({ message, key }: { message: string, key?: string }) => {
 
 const History = () => {
     const { inputHistory } = useContext<JournalContextType>(JournalContext);
+    const { setOpenModal } = useContext<ModalContextType>(ModalContext);
+    const { apiKey } = useContext<ApiKeyContextType>(ApiKeyContext);
 
     return (
         <>
@@ -35,6 +41,16 @@ const History = () => {
                         </div>
                     </div>
                 </div>
+                {apiKey.length === 0 && <Alert color="amber">
+                    <div className="flex justify-center items-center">
+                        <div className="text-center">
+                            Your OpenAI API key isn&apos;t configured.
+                        </div>
+                        <div className="ml-8">
+                            <Button onClick={() => setOpenModal(Modals.API_KEY)}>Set up key</Button>
+                        </div>
+                    </div>
+                </Alert>}
                 {
                     inputHistory.map(historyEntry => {
                         return (

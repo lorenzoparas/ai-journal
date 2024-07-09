@@ -1,8 +1,8 @@
+import OpenAI from "openai";
 import { CONTEXT_PROMPTS } from "../consts/service";
-import openai from "../openai";
 import { Service } from "../types/service";
 
-const identifyService = async (journal: string, service: Service) => {
+const identifyService = async (journal: string, service: Service, openai: OpenAI) => {
     const response = await openai.chat.completions.create({
         messages: [
             { role: "system", content: CONTEXT_PROMPTS[service] },

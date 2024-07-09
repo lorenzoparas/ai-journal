@@ -1,6 +1,10 @@
+import { useContext } from "react";
+import { ApiKeyContext } from "../context/api-key";
 import openai from "../openai";
+import { ApiKeyContextType } from "../types/api-key";
+import OpenAI from "openai";
 
-const categoriseCognitiveDistortions = async (quotes: string[]) => {
+const categoriseCognitiveDistortions = async (quotes: string[], openai: OpenAI) => {
     if (quotes.length === 0) return { thinkingPatterns: [] }; 
 
     const response = await openai.chat.completions.create({
