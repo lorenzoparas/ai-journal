@@ -1,6 +1,7 @@
+import OpenAI from "openai";
 import openai from "../openai";
 
-const identifyCognitiveDistortions = async (journal: string) => {
+const identifyCognitiveDistortions = async (journal: string, openai: OpenAI) => {
     const response = await openai.chat.completions.create({
         messages: [
             { role: "system", content: "You go through each sentence and extract every single example of a cognitive distortion in a journal entry, using direct quotes only."},

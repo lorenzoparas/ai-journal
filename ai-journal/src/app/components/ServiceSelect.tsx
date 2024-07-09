@@ -9,6 +9,8 @@ import { Role } from "../types/history";
 import identifyService from "../gpt/identifyService";
 import categoriseService from "../gpt/categoriseService";
 import { SparklesIcon } from "@heroicons/react/24/outline";
+import { ApiKeyContextType } from "../types/api-key";
+import { ApiKeyContext } from "../context/api-key";
 
 const ServiceSelect = () => {
     const {
@@ -20,6 +22,8 @@ const ServiceSelect = () => {
         setInputHistory
     } = useContext<JournalContextType>(JournalContext);
 
+    const { openai, apiKey } = useContext<ApiKeyContextType>(ApiKeyContext);
+
     const processService = (service: Service) => {
         if (journal.length === 0) return;
         if (service === Service.TC) onTC(journal);
@@ -28,16 +32,18 @@ const ServiceSelect = () => {
     };
 
     const onTC = async (journal: string) => {
+        if (!openai) return;
+
         let newInputHistory = [...inputHistory, { role: Role.USER, message: 'Scan for cognitive biases.' }];
         setInputHistory(newInputHistory);
 
         setIsLoading(true);
 
-        const cognitiveDistortions = await identifyCognitiveDistortions(journal);
+        const cognitiveDistortions = await identifyCognitiveDistortions(journal, openai);
         const quotes = cognitiveDistortions.quotes;
 
         if (quotes.length === 0) return;
-        const categorisedCognitiveDistortions = await categoriseCognitiveDistortions(quotes);
+        const categorisedCognitiveDistortions = await categoriseCognitiveDistortions(quotes, openai);
 
         setIsLoading(false);
 
@@ -48,16 +54,18 @@ const ServiceSelect = () => {
     };
 
     const onPC = async (journal: string) => {
+        if (!openai) return;
+
         let newInputHistory = [...inputHistory, { role: Role.USER, message: 'Offer a different perspective.' }];
         setInputHistory(newInputHistory);
 
         setIsLoading(true);
 
-        const identifyOutput = await identifyService(journal, Service.PC);
+        const identifyOutput = await identifyService(journal, Service.PC, openai);
         const quotes = identifyOutput.quotes;
 
         if (quotes.length === 0) return;
-        const categorisedOutput = await categoriseService(quotes, Service.PC);
+        const categorisedOutput = await categoriseService(quotes, Service.PC, openai);
 
         setIsLoading(false);
 
@@ -68,16 +76,18 @@ const ServiceSelect = () => {
     };
 
     const onDI = async (journal: string) => {
+        if (!openai) return;
+
         let newInputHistory = [...inputHistory, { role: Role.USER, message: 'Suggest prompts for deeper insights.' }];
         setInputHistory(newInputHistory);
 
         setIsLoading(true);
 
-        const identifyOutput = await identifyService(journal, Service.DI);
+        const identifyOutput = await identifyService(journal, Service.DI, openai);
         const quotes = identifyOutput.quotes;
 
         if (quotes.length === 0) return;
-        const categorisedOutput = await categoriseService(quotes, Service.DI);
+        const categorisedOutput = await categoriseService(quotes, Service.DI, openai);
 
         setIsLoading(false);
 
@@ -90,7 +100,7 @@ const ServiceSelect = () => {
     return (
         <Select
             label={"AI Powered Analysis"}
-            disabled={isLoading || journal.length === 0}
+            disabled={isLoading || journal.length === 0 || apiKey.length === 0}
             onChange={val => processService(val as Service)}
             arrow={isLoading ? <Spinner /> : <SparklesIcon />}
         >
